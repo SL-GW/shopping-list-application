@@ -15,10 +15,87 @@
         font-family: "Over the Rainbow", cursive;
         font-weight: 400;
         font-style: normal;
+        background: #edb1f1;
+        color: #113f67;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 60px;
+        margin-top: 15px;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 0;
+        text-align: center;
+        font-size: 25px;
+      }
+
+      li {
+        background: #9896f1;
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+        border-radius: 6px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      }
+
+      .box {
+        background: #9896f1;
+        text-align: center;
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+        border-radius: 6px;
+        padding: 30px 50px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+      }
+
+      .instructions {
+        font-size: 25px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      .input-text {
+        font-family: "Over the Rainbow", cursive;
+        line-height: 1.5;
+        font-size: 25px;
+        border-radius: 6px;
+        border: solid 2px #edb1f1;
+        margin-right: 30px;
+        width: 400px;
+      }
+      .input-button {
+        font-family: "Over the Rainbow", cursive;
+        border: solid 2px #edb1f1;
+        font-size: 18px;
+        border-radius: 6px;
+        width: 110px;
+        font-weight: 600;
+        color: #113f67;
+        background: #8ef6e4;
+      }
+
+      .input-button:hover {
+        font-size: 20px;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
     <h1>Shopping List</h1>
+    <div class="box">
+      <div class="instructions">Enter the items you need to buy</div>
+      <form>
+        <input class="input-text" type="text" placeholder="Item wanted" />
+        <input class="input-button" type="submit" value="Add item" />
+      </form>
+    </div>
+    <ul>
+      <li>Tester</li>
+    </ul>
   </body>
 </html>
