@@ -40,6 +40,7 @@
         border-radius: 6px;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
           rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        margin-bottom: 10px;
       }
 
       .box {
@@ -89,13 +90,54 @@
     <h1>Shopping List</h1>
     <div class="box">
       <div class="instructions">Enter the items you need to buy</div>
-      <form>
-        <input class="input-text" type="text" placeholder="Item wanted" />
+      <form id="shopping-form">
+        <input
+          id="shopping-list-item"
+          class="input-text"
+          type="text"
+          placeholder="Item wanted"
+        />
         <input class="input-button" type="submit" value="Add item" />
       </form>
     </div>
-    <ul>
-      <li>Tester</li>
+    <ul id="shopping-list-list">
+      <li></li>
     </ul>
+    <script>
+      let shoppingForm = document.getElementById("shopping-form");
+      let shoppingListItem = document.getElementById("shopping-list-item");
+      let shoppingListList = document.getElementById("shopping-list-list");
+
+      shoppingForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let itemText = shoppingListItem.value;
+      });
+
+      function addItem(itemText, list) {
+        let newItem = document.createElement("li");
+        newItem.innerHTML = `
+        ${itemText}
+        <input type=checkbox class="item-to-buy"/>
+        <button class="delete-item">Delete</button>`;
+
+        list.appendChild(newItem);
+
+        newItem
+          .querySelector(".item-to-buy")
+          .addEventListener("change", function () {
+            if (this.checked) {
+              newItem.style.textDecoration = "linethrough";
+            } else {
+              newItem.style.textDecoration = "none";
+            }
+          });
+
+        newItem
+          .querySelector("delete-item")
+          .addEventListener("click", function () {
+            list.removeChild(newItem);
+          });
+      }
+    </script>
   </body>
 </html>
