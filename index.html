@@ -84,6 +84,29 @@
         font-size: 20px;
         cursor: pointer;
       }
+
+      .delete-item {
+        font-family: "Over the Rainbow", cursive;
+        border: solid 2px #edb1f1;
+        font-size: 18px;
+        border-radius: 6px;
+        width: 110px;
+        font-weight: 600;
+        color: #113f67;
+        background: #8ef6e4;
+        margin-left: 60px;
+      }
+
+      .buy-item {
+        margin-right: 40px;
+        font-weight: 600;
+      }
+
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        transform: scale(1.5);
+      }
     </style>
   </head>
   <body>
@@ -103,40 +126,60 @@
     <ul id="shopping-list-list">
       <li></li>
     </ul>
+
     <script>
+      // Get references to the DOM elements
       let shoppingForm = document.getElementById("shopping-form");
       let shoppingListItem = document.getElementById("shopping-list-item");
       let shoppingListList = document.getElementById("shopping-list-list");
 
-      shoppingForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        let itemText = shoppingListItem.value;
-      });
+      // Handle form submission
+      shoppingForm.addEventListener("submit", handleSubmit);
 
-      function addItem(itemText, list) {
+      function handleSubmit(event) {
+        event.preventDefault();
+
+        // Get the item text from the input field
+        let itemText = shoppingListItem.value;
+
+        if (itemText.trim() !== "") {
+          // Call the function to add the item to the list
+          addItemToList(itemText);
+
+          // Clear the input field after submission
+          shoppingListItem.value = "";
+        }
+      }
+
+      function addItemToList(itemText) {
+        // Create a new list item element
         let newItem = document.createElement("li");
+
+        // Set the inner HTML for the new list item
         newItem.innerHTML = `
         ${itemText}
-        <input type=checkbox class="item-to-buy"/>
-        <button class="delete-item">Delete</button>`;
+        <input type="checkbox" class="buy-item"/>
+        <button class="delete-item">Delete</button>
+      `;
 
-        list.appendChild(newItem);
+        // Add the new item to the shopping list
+        shoppingListList.appendChild(newItem);
 
-        newItem
-          .querySelector(".item-to-buy")
-          .addEventListener("change", function () {
-            if (this.checked) {
-              newItem.style.textDecoration = "linethrough";
-            } else {
-              newItem.style.textDecoration = "none";
-            }
-          });
+        // Add event listener for marking the item as bought
+        let checkbox = newItem.querySelector(".buy-item");
+        checkbox.addEventListener("change", function () {
+          if (this.checked) {
+            newItem.style.textDecoration = "line-through";
+          } else {
+            newItem.style.textDecoration = "none";
+          }
+        });
 
-        newItem
-          .querySelector("delete-item")
-          .addEventListener("click", function () {
-            list.removeChild(newItem);
-          });
+        // Add event listener for deleting the item
+        let deleteButton = newItem.querySelector(".delete-item");
+        deleteButton.addEventListener("click", function () {
+          shoppingListList.removeChild(newItem);
+        });
       }
     </script>
   </body>
